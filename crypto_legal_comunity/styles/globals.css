@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   CLC Design Tokens
+   ========================================================================== */
+
+@theme inline {
+  --color-void: #080b10;
+  --color-surface: #11161d;
+  --color-surface-2: #151b24;
+  --color-paper: #e8e5de;
+  --color-mute: #89919d;
+  --color-accent: #315a78;
+  --color-accent-soft: #4a7195;
+  --color-bronze: #a88b5a;
+  --color-bronze-soft: #c2a578;
+
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-content: 1280px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-surface-2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-void);
+    scrollbar-color: var(--color-surface-2) var(--color-void);
+    scrollbar-width: thin;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-bronze);
+    color: var(--color-void);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-bronze-soft);
+    outline-offset: 4px;
+  }
+
+  /* Slim, quiet scrollbar — WebKit */
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-surface-2);
+    border-radius: 999px;
+    border: 2px solid var(--color-void);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility container-clc {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container-clc {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-clc {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility text-balance-pretty {
+  text-wrap: balance;
+}
+
+/* Subtle paper grain */
+
+@utility bg-grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Numeral styling */
+
+@utility num-display {
+  font-family: var(--font-display);
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
