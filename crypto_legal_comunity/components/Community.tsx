@@ -31,7 +31,7 @@ export default function Community() {
         <div className="mt-16 grid auto-rows-[130px] grid-cols-2 gap-3 sm:auto-rows-[160px] sm:grid-cols-4 sm:gap-4">
           {galleryItems.map((item, i) => (
    <Reveal
-  key={item.caption}
+  key={`${item.caption}-${i}`}
   delay={i * 0.07}
   className={`${SPAN_CLASS[item.span]} relative overflow-hidden`}
 >

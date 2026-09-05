@@ -166,57 +166,64 @@ export const communityStats: Stat[] = [
 ];
 
 export type GalleryItem = {
+  id: string;
   caption: string;
   variant: "a" | "b" | "c" | "d" | "e" | "f";
   span: "tall" | "wide" | "regular";
   image: string;
 };
-
 export const galleryItems: GalleryItem[] = [
   {
+    id: "legal-discussion",
     caption: "Legal Discussion",
     variant: "a",
     span: "tall",
     image: "/image/gallery-1.jpeg",
   },
   {
+    id: "seminar",
     caption: "Seminar",
     variant: "b",
     span: "regular",
     image: "/image/gallery-2.jpeg",
   },
   {
+    id: "students",
     caption: "Students",
     variant: "c",
     span: "regular",
     image: "/image/gallery-3.jpeg",
   },
   {
+    id: "presentation",
     caption: "Presentation",
     variant: "d",
     span: "wide",
     image: "/image/gallery-4.jpeg",
   },
   {
+    id: "networking",
     caption: "Networking",
     variant: "e",
     span: "regular",
     image: "/image/gallery-5.jpeg",
   },
   {
+    id: "idbw-2026-1",
     caption: "IDBW 2026",
     variant: "f",
     span: "regular",
     image: "/image/gallery-6.jpeg",
   },
   {
+    id: "idbw-2026-2",
     caption: "IDBW 2026",
     variant: "f",
     span: "regular",
     image: "/image/imge1.jpeg",
   },
-  
 ];
+  
 
 export type Discussion = {
   number: string;
