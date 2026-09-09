@@ -32,8 +32,13 @@ export default function Insights() {
           {insights.map((item, i) => (
             <Reveal key={item.number} delay={i * 0.08}>
               <div
-                className="group grid grid-cols-[auto_1fr] items-start gap-x-6 gap-y-4 border-b border-surface-2 py-8 transition-colors duration-300 hover:bg-surface/40 sm:grid-cols-[3rem_7rem_1fr_auto] sm:items-center sm:gap-x-8 sm:px-4"
+                className="group relative grid grid-cols-[auto_1fr] items-start gap-x-6 gap-y-4 border-b border-surface-2 py-8 transition-colors duration-300 hover:bg-surface/40 sm:grid-cols-[3rem_7rem_1fr_auto] sm:items-center sm:gap-x-8 sm:px-4"
               >
+                {/* Bronze hairline slides in under the row on hover. */}
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-0 h-px w-0 bg-bronze/60 transition-all duration-500 ease-out group-hover:w-full"
+                />
                 <span className="num-display text-lg text-bronze/70 sm:text-xl">
                   {item.number}
                 </span>

@@ -3,6 +3,8 @@
 // Keeping copy here (instead of scattered inline in components) means
 // every section component stays a clean, reusable template.
 
+import { WHATSAPP_URL } from "./config";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -14,6 +16,8 @@ export const navLinks: NavLink[] = [
   { label: "Insights", href: "#insights" },
   { label: "Programs", href: "#programs" },
   { label: "Community", href: "#community" },
+  { label: "Market", href: "#market" },
+  { label: "Office", href: "#location" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -274,15 +278,25 @@ export const contactChannels: ContactChannel[] = [
     icon: "whatsapp",
     label: "WhatsApp",
     value: "Crypto Legal Community",
-    href: " https://chat.whatsapp.com/BQOBBC4E5z72r7iv0vzYik",
+    href: "https://chat.whatsapp.com/BQOBBC4E5z72r7iv0vzYik",
   },
   {
     icon: "users",
     label: "Community",
     value: "Join the discussion space",
-    href: "https://discord.gg/cryptolegalcommunity",
+    href: buildCommunityWhatsAppUrl(),
   },
 ];
+
+// Build the WhatsApp URL used for community join links. Kept here so the
+// contact list stays data-driven; the number lives in lib/config.
+function buildCommunityWhatsAppUrl(): string {
+  const message =
+    "Halo Admin, saya ingin bergabung ke Komunitas.\n\n" +
+    "Saya mengetahui komunitas ini melalui website.\n\n" +
+    "Mohon informasi mengenai cara bergabung.";
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+}
 
 export const siteMeta = {
   name: "Crypto Legal Community",

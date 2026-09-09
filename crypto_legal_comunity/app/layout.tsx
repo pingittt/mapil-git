@@ -7,6 +7,8 @@ import "@fontsource-variable/fraunces/standard-italic.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import "../styles/globals.css";
+import MotionProvider from "@/components/ui/MotionProvider";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const SITE_URL = "https://cryptolegalcommunity.id";
 const TITLE = "Crypto Legal Community — Law, Digital Economy & Crypto";
@@ -61,7 +63,10 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className="bg-void font-sans text-paper antialiased">
-        {children}
+        <MotionProvider>
+          <ScrollProgress />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

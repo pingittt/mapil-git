@@ -11,10 +11,19 @@ import type { LucideIcon } from "lucide-react";
 
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import SoundLink from "@/components/ui/SoundLink";
 import Reveal from "@/components/ui/Reveal";
 import SectionMark from "@/components/ui/SectionMark";
 import SplitText from "@/components/ui/SplitText";
 import { contactChannels } from "@/lib/data";
+import { WHATSAPP_URL } from "@/lib/config";
+
+const COMMUNITY_MESSAGE =
+  "Halo Admin, saya ingin bergabung ke Komunitas.\n\n" +
+  "Saya mengetahui komunitas ini melalui website.\n\n" +
+  "Mohon informasi mengenai cara bergabung.";
+
+const communityWhatsAppUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(COMMUNITY_MESSAGE)}`;
 
 const ICONS: Record<string, LucideIcon> = {
   mail: Mail,
@@ -52,7 +61,7 @@ export default function Contact() {
 
             return (
               <Reveal key={channel.label} delay={i * 0.08}>
-                <a
+                <SoundLink
                   href={channel.href}
                   target={isExternal ? "_blank" : undefined}
                   rel={
@@ -60,8 +69,13 @@ export default function Contact() {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="group flex flex-col gap-2 border-b border-surface-2 py-6 transition-colors duration-300 hover:border-bronze/40 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                  className="group relative flex flex-col gap-2 py-6 transition-colors duration-300 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 >
+                  {/* Bronze hairline sweeps in on hover, echoing the navbar. */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-bronze/60 transition-all duration-500 ease-out group-hover:w-full"
+                  />
                   <span className="flex shrink-0 items-center gap-4">
                     <Icon
                       className="h-4 w-4 text-mute/60 transition-colors duration-300 group-hover:text-bronze"
@@ -77,11 +91,11 @@ export default function Contact() {
                     {channel.value}
 
                     <ArrowUpRight
-                      className="h-4 w-4 shrink-0 text-mute transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-bronze"
+                      className="h-4 w-4 shrink-0 text-mute transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-bronze"
                       aria-hidden="true"
                     />
                   </span>
-                </a>
+                </SoundLink>
               </Reveal>
             );
           })}
@@ -92,10 +106,10 @@ export default function Contact() {
           className="mt-16 flex justify-center"
         >
           <Button
-            href="https://discord.gg/cryptolegalcommunity"
+            href={communityWhatsAppUrl}
             variant="primary"
           >
-            Join the Community
+            Join Komunitas
           </Button>
         </Reveal>
       </Container>

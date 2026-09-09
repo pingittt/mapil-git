@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -12,14 +12,17 @@ import { editorialEase } from "@/lib/motion";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
   // Subtle parallax — the visual drifts slower than the page, never more.
-  const visualY = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  // Disabled entirely under prefers-reduced-motion (useTransform-driven
+  // style values bypass MotionConfig, so gate them manually here).
+  const visualY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 90]);
+  const textY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 40]);
 
   return (
     <section

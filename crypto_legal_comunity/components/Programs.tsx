@@ -39,7 +39,7 @@ export default function Programs() {
               <Reveal
                 key={program.title}
                 delay={i * 0.08}
-                className={`group border border-surface-2 p-8 transition-colors duration-500 hover:border-bronze/40 ${SPANS[i]} ${
+                className={`group border border-surface-2 p-8 transition-[border-color,transform,box-shadow] duration-500 hover:-translate-y-1 hover:border-bronze/40 hover:shadow-[0_20px_44px_-24px_rgba(0,0,0,0.8)] ${SPANS[i]} ${
                   isLead ? "sm:p-10" : ""
                 }`}
               >
@@ -48,7 +48,7 @@ export default function Programs() {
                     0{i + 1}
                   </span>
                   <Icon
-                    className="h-5 w-5 text-bronze/70 transition-transform duration-500 group-hover:-translate-y-0.5"
+                    className="h-5 w-5 text-bronze/70 transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110"
                     aria-hidden="true"
                   />
                 </div>

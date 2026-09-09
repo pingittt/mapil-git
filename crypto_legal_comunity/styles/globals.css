@@ -146,3 +146,82 @@
   font-feature-settings: "lnum" 1, "tnum" 1;
   font-variant-numeric: lining-nums tabular-nums;
 }
+
+/* --------------------------------------------------------------------------
+   Motion keyframes
+   -------------------------------------------------------------------------- */
+
+/* Error feedback: a short, polite shake (reserved for form validation).
+   Amplitude is small on purpose — feedback, not punishment. */
+@keyframes clc-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-3px); }
+  40%, 60% { transform: translateX(3px); }
+}
+
+.clc-shake {
+  animation: clc-shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Loading placeholder shimmer — cheaper and quieter than a full pulse. */
+@keyframes clc-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.clc-skeleton {
+  background: linear-gradient(
+    100deg,
+    var(--color-surface-2) 40%,
+    color-mix(in srgb, var(--color-surface-2) 60%, var(--color-paper) 8%) 50%,
+    var(--color-surface-2) 60%
+  );
+  background-size: 200% 100%;
+  animation: clc-shimmer 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clc-shake,
+  .clc-sheen::after,
+  .clc-skeleton {
+    animation: none;
+  }
+
+  .clc-sheen::after {
+    opacity: 0 !important;
+  }
+}
+
+/* Premium sheen sweep for solid primary CTAs. A soft bronze-tinted light
+   band crosses the button once on hover — transform/opacity only. */
+@utility clc-sheen {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(-120%) skewX(-18deg);
+
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgb(255 255 255 / 0.28) 50%,
+      transparent 70%
+    );
+  }
+
+  &:hover::after {
+    opacity: 1;
+    animation: clc-sheen-sweep 0.7s var(--ease-editorial);
+  }
+}
+
+@keyframes clc-sheen-sweep {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to { transform: translateX(120%) skewX(-18deg); }
+}

@@ -1,6 +1,9 @@
 import Logo from "@/components/ui/Logo";
 import Container from "@/components/ui/Container";
+import SoundLink from "@/components/ui/SoundLink";
+import SoundToggle from "@/components/ui/SoundToggle";
 import { navLinks, siteMeta } from "@/lib/data";
+import { sectionHref } from "@/lib/navigation";
 
 export default function Footer() {
   return (
@@ -19,22 +22,26 @@ export default function Footer() {
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-10 gap-y-3 sm:flex sm:flex-col sm:gap-3">
             {navLinks.map((link) => (
-              <a
+              <SoundLink
                 key={link.href}
-                href={link.href}
-                className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute transition-colors duration-300 hover:text-paper"
+                href={sectionHref(link.href)}
+                className="group relative w-fit font-mono text-[11px] uppercase tracking-[0.18em] text-mute transition-colors duration-300 hover:text-paper"
               >
                 {link.label}
-              </a>
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-bronze transition-all duration-300 ease-out group-hover:w-full" />
+              </SoundLink>
             ))}
           </nav>
         </div>
 
         <div className="flex flex-col gap-3 border-t border-surface-2 py-8 text-xs text-mute/60 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; 2026 Crypto Legal Community. All rights reserved.</p>
-          <p className="font-mono uppercase tracking-[0.2em]">
-            Built for the digital generation
-          </p>
+          <div className="flex items-center gap-4">
+            <SoundToggle />
+            <p className="font-mono uppercase tracking-[0.2em]">
+              Built for the digital generation
+            </p>
+          </div>
         </div>
       </Container>
     </footer>
